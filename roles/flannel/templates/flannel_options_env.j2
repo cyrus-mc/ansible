@@ -1,0 +1,3 @@
+# defaults to the interface for the default route on the machine
+FLANNELD_IFACE={{ ansible_eth0.ipv4.address }}
+FLANNELD_ETCD_ENDPOINTS=http://${ETCD_ELB}:2379

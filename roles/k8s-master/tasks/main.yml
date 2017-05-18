@@ -1,0 +1,20 @@
+---
+- name: Create directories /etc/kubernetes/manifests
+  file: 
+    path: /etc/kubernetes/{{item}} 
+    state: directory 
+    mode: 0755 
+    recurse: yes 
+    owner: root 
+    group: root
+  with_items: [ "manifests", "ssl", "cni" ]
+
+- name: Write Kubernetes Manifests
+  template:
+    src: "{{ item }}.yaml.j2"
+    dest: /etc/kubernetes/manifests/{{item}}.yaml
+    mode: 0644
+    owner: root
+    group: root
+  with_items: [ "kube-apiserver", "kube-proxy", "kube-controller-manager", "kube-scheduler" ]
+  tags: kubernetes-manifest

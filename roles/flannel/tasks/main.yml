@@ -1,0 +1,16 @@
+---
+- name: Create /etc/flannel/options.env
+  template:
+    src: flannel_options_env.j2
+    dest: /etc/flannel/options.env
+  tags: flannel
+
+- name: Create flanneld drop-in directory
+  file: path=/etc/systemd/system/flanneld.service.d state=directory mode=0755
+
+- name: Set flannel ExecStartPre
+  template:
+    src: 40-ExecStartPre-symlink.conf
+    dest: /etc/systemd/system/flanneld.service.d
+  notify:
+    - Reload systemd
