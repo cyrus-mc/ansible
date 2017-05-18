@@ -7,14 +7,14 @@ spec:
   hostNetwork: true
   containers:
   - name: kube-apiserver
-    image: quay.io/coreos/hyperkube:${K8S-VERSION}
+    image: {{ vars.hyperkube.image }}:{{ vars.hyperkube.tag }}
     command:
     - /hyperkube
     - apiserver
     - --bind-address=0.0.0.0
     - --etcd-servers=http://${ETCD_ELB}:2379
     - --allow-privileged=true
-    - --service-cluster-ip-range=${SERVICE_IP_RANGE}
+    - --service-cluster-ip-range={{ vars.kubernetes.service_ip_range }}
     - --secure-port=443
     - --advertise-address=${ADVERTISE_IP}
     - --admission-control=NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota
