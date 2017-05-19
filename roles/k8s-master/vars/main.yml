@@ -2,7 +2,7 @@
 
 hyperkube:
   image: quay.io/coreos/hyperkube
-  tag: 1.6.3_coreos.0
+  tag: v1.6.3_coreos.0
 
 kubernetes:
   network_plugin: cni
