@@ -18,3 +18,10 @@
     group: root
   with_items: [ "kube-proxy" ]
   tags: kubernetes-manifest
+
+- name: Worker KubeConfig
+  template:
+    src: worker-kubeconfig.yaml.j2
+    dest: /etc/kubernetes/worker-kubeconfig.yaml
+    mode: 0644
+  tags: kubernetes-config

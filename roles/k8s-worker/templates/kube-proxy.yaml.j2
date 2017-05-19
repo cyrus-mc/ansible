@@ -7,11 +7,11 @@ spec:
   hostNetwork: true
   containers:
   - name: kube-proxy
-    image: quay.io/coreos/hyperkube:${K8S-VERSION}
+    image: {{ vars.hyperkube.image }}:{{ vars.hyperkube.tag }}
     command:
     - /hyperkube
     - proxy
-    - --master=https://${API_ELB}
+    - --master=https://{{ ansible_local.k8s_facts.api_elb }}
     - --kubeconfig=/etc/kubernetes/worker-kubeconfig.yaml
     securityContext:
       privileged: true
