@@ -1,0 +1,6 @@
+
+---                                                                             
+- name: etcd_systemd
+  systemd:
+    name: etcd2
+    daemon_reload: yes
