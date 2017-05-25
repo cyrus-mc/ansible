@@ -25,7 +25,7 @@
     dest: /etc/systemd/system/flanneld.service.d/40-ExecStartPre-symlink.conf
     mode: 0644
   notify: 
-  - systemd
+  - flanneld_systemd
   tags: flannel_dropin
 
 - name: Drop-In 50-network-config.conf
@@ -34,7 +34,7 @@
     dest: /etc/systemd/system/flanneld.service.d/50-network-config.conf
     mode: 0644
   notify:
-  - systemd
+  - flanneld_systemd
   tags: flannel_dropin
 
 - name: CNI Configuration Directory

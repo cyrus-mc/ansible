@@ -1,5 +1,5 @@
 ---
-- name: systemd_docker
+- name: docker_systemd
   systemd:
     name: docker
     enabled: yes

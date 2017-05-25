@@ -1,5 +1,5 @@
 ---
-- name: systemd
+- name: flanneld_systemd
   systemd:
     name: flanneld
     enabled: yes

@@ -25,3 +25,18 @@
     dest: /etc/kubernetes/worker-kubeconfig.yaml
     mode: 0644
   tags: kubernetes-config
+
+- name: Kubelet systemd service
+  template:
+    src: kubelet.service.j2
+    dest: /etc/systemd/system/kubelet.service
+    mode: 0644
+  notify:
+  - k8s_worker_kubelet_systemd
+  tags: kubelet
+
+- name: Kubelet start
+  systemd: 
+    name: kubelet
+    enabled: yes
+    state: started

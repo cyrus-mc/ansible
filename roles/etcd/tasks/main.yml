@@ -7,12 +7,6 @@
 # 1 - check if file exists
 #
 
-# ensure etcd2 is stopped (as it usually starts automatically on CoreOS)
-- name: etcd2 stop
-  systemd:
-    name: etcd2
-    state: stopped
-
 # trigger file used to check whether we have bootstrapped before
 - stat:
     path: /root/.etcd_bootstrap
@@ -23,6 +17,12 @@
     that:
      - etcd_bootstrap.stat.exists == false
     msg: 'etcd bootstrap has already run, exiting to prevent corruption of etcd cluster'
+
+# ensure etcd2 is stopped (as it usually starts automatically on CoreOS)
+- name: etcd2 stop
+  systemd:
+    name: etcd2
+    state: stopped
 
 # if we get this far, assume rest will be successfully
 - name: touch /root/.etcd.bootstrap
@@ -40,7 +40,7 @@
   ignore_errors: True
   s3:
     bucket: smarsh-k8s-dev
-    object: /backup.tar.gz2
+    object: /backup.tar.gz
     dest: /tmp/etcd-backup.tar.gz
     mode: get
 
@@ -48,9 +48,9 @@
     path: /tmp/etcd-backup.tar.gz
   register: etcd_backup
 
-- debug:
-    msg: "Backup exists"
-  when: etcd_backup.stat.exists == True
+  #- debug:
+  #  msg: "Backup exists"
+  #when: etcd_backup.stat.exists == True
 
 - name: 20-ansibleinit.conf
   template:
@@ -61,36 +61,23 @@
   - etcd_systemd
   when: etcd_backup.stat.exists == False
 
-#- name: delete current etcd data_dir
-#  file:
-#    state: absent
-#    path: /var/lib/etc2/member
+- name: copy etcd-recovery.sh
+  copy:
+    src: etcd-recovery.sh
+    dest: /root/etcd-recovery.sh
+    mode: 0700
+  when: etcd_backup.stat.exists == True
 
-  #- name: extract etcd backup
-  #unarchive:
-  #  src: /tmp/etcd-backup.tar.gz
-  #  dest: /
-  #  remote_src: True
-  #when: etcd_bootstrap.stat.exists == False
+- name: run etcd-recovery.sh
+  shell: ./etcd-recovery.sh {{ ansible_local.k8s_facts.hostname }} {{ ansible_eth0.ipv4.address }}
+  args:
+    chdir: /root
+    executable: /bin/bash
+  when: etcd_backup.stat.exists == True
 
-  #- name: Drop-In Directory
-  #file:
-  #  path: /etc/systemd/system/etcd2.service.d
-  #  state: directory
-  #  mode: 0755
-  #tags: etcd_systemd
-
-  #- name: Drop-In 98-force-new-cluster.conf
-  #template:
-  #  src: 98-force-new-cluster.conf.j2
-  #  dest: /etc/systemd/system/etcd2.service.d/98-force-new-cluster.conf
-  #  mode: 0644
-  #notify:
-  #- etcd_systemd
-
-  #- name: etcd2 start 
-  #systemd:
-  #  name: etcd2
-  #  enabled: yes
-  #  state: started
-
+- name: start etcd2
+  systemd:
+    name: etcd2
+    enabled: yes
+    state: started
+    daemon_reload: yes

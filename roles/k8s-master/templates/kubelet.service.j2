@@ -16,7 +16,7 @@ ExecStart=/usr/lib/coreos/kubelet-wrapper \
   --container-runtime=docker \
   --allow-privileged=true \
   --pod-manifest-path=/etc/kubernetes/manifests \
-  --hostname-override={{ ansible_eth0.ipv4.address }} \
+  --hostname-override={{ ansible_fqdn }} \
   --cluster_dns={{ vars.kubernetes.dns_service_ip }} \
   --cluster_domain=cluster.local
 ExecStop=-/usr/bin/rkt stop --uuid-file=/var/run/kubelet-pod.uuid

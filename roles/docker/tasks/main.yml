@@ -12,7 +12,7 @@
     dest: /etc/systemd/system/docker.service.d/40-flannel.conf
     mode: 0644
   notify:
-  - systemd_docker
+  - docker_systemd
   tags: docker_dropin
 
 - name: CNI Configuration Directory
