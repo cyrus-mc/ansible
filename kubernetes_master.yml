@@ -1,6 +1,11 @@
-- name: Hello World Sample
-  hosts: all
-  tasks:
-    - name: Hello Message
-      debug:
-        msg: "Hello World!"
+---
+- hosts: all
+  vars:
+    ansible_python_interpreter: "/home/core/bin/python"
+    ansible_become: true
+  gather_facts: true
+  roles:
+  - etcd
+  - flannel
+  - docker
+  - k8s-master
