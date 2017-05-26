@@ -25,7 +25,6 @@ spec:
     - --runtime-config=extensions/v1beta1/networkpolicies=true
     - --anonymous-auth=false
     - --cloud-provider=aws
-    - --storage-backend=etcd2
     livenessProbe:
       httpGet:
         host: 127.0.0.1
