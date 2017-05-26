@@ -16,15 +16,15 @@
 - block:
 
   # ensure etcd2 is stopped (as it usually starts automatically on CoreOS)
-  - name: etcd2 stop
+  - name: etcd-member stop
     systemd:
-      name: etcd2
+      name: etcd-member
       state: stopped
 
-  - name: clean etcd2 data-dir
+  - name: clean etcd data-dir
     file:
       state: absent
-      path: /var/lib/etcd2/member
+      path: /var/lib/etcd/member
 
   # if we get this far, assume rest will be successfully
   - name: touch /root/.etcd.bootstrap
@@ -34,7 +34,7 @@
 
   - name: Systemd Drop-In Directory
     file:
-      path: /etc/systemd/system/etcd2.service.d
+      path: /etc/systemd/system/etcd-member.service.d
       state: directory
       mode: 0755
 
@@ -53,7 +53,7 @@
   - name: 20-ansibleinit.conf
     template:
       src: 20-ansibleinit.conf.j2
-      dest: /etc/systemd/system/etcd2.service.d/20-ansibleinit.conf
+      dest: /etc/systemd/system/etcd-member.service.d/20-ansibleinit.conf
       mode: 0644
     notify:
     - etcd_systemd
@@ -75,9 +75,9 @@
 
   when: etcd_bootstrap.stat.exists == False
 
-- name: start etcd2
+- name: start etcd-member
   systemd:
-    name: etcd2
+    name: etcd-member
     enabled: yes
     state: started
     daemon_reload: yes

@@ -2,5 +2,5 @@
 ---                                                                             
 - name: etcd_systemd
   systemd:
-    name: etcd2
+    name: etcd-member
     daemon_reload: yes
