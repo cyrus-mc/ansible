@@ -1,0 +1,3 @@
+# from GitHub
+- src: git@github.com:Smarsh/ansible_etcd.git
+  scm: git
