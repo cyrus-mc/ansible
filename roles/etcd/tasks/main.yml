@@ -21,6 +21,11 @@
       name: etcd2
       state: stopped
 
+  - name: clean etcd2 data-dir
+    file:
+      state: absent
+      path: /var/lib/etcd2/member
+
   # if we get this far, assume rest will be successfully
   - name: touch /root/.etcd.bootstrap
     file:
