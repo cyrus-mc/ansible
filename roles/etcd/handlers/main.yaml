@@ -1,6 +1,0 @@
-
----                                                                             
-- name: etcd_systemd
-  systemd:
-    name: etcd-member
-    daemon_reload: yes
