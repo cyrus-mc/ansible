@@ -3,3 +3,11 @@
 - src: https://github.com/Smarsh/ansible_etcd.git
   name: etcd
   scm: git
+
+- src: https://github.com/Smarsh/ansible_docker.git
+  name: docker
+  scm: git
+
+- src: https://github.com/Smarsh/ansible_flannel.git
+  name: flannel
+  scm: git
