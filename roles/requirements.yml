@@ -1,5 +1,5 @@
 ---
 # from GitHub
-- src: ssh://git@github.com/Smarsh/ansible_etcd.git
+- src: https://github.com/Smarsh/ansible_etcd.git
   name: etcd
   scm: git
