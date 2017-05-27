@@ -1,8 +1,0 @@
----
-- name: flanneld_systemd
-  systemd:
-    name: flanneld
-    enabled: yes
-    state: started
-    daemon_reload: yes
-
