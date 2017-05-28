@@ -1,4 +1,6 @@
 ---
+- src: yatesr.timezone
+
 # from GitHub
 - src: https://github.com/Smarsh/ansible_etcd.git
   name: etcd
