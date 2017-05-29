@@ -17,7 +17,6 @@ ExecStart=/usr/lib/coreos/kubelet-wrapper \
   --register-node=true \
   --allow-privileged=true \
   --pod-manifest-path=/etc/kubernetes/manifests \
-  --hostname-override={{ ansible_fqdn }} \
   --cluster_dns={{ vars.kubernetes.dns_service_ip }} \
   --cluster_domain=cluster.local \
   --kubeconfig=/etc/kubernetes/worker-kubeconfig.yaml \
