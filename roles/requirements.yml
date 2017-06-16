@@ -5,6 +5,7 @@
 - src: https://github.com/Smarsh/ansible_etcd.git
   name: etcd
   scm: git
+  version: static_discovery
 
 - src: https://github.com/Smarsh/ansible_docker.git
   name: docker
