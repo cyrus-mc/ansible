@@ -14,6 +14,7 @@
 - src: https://github.com/Smarsh/ansible_flannel.git
   name: flannel
   scm: git
+  version: static_discovery
 
 - src: https://github.com/Smarsh/ansible_k8s_master.git
   name: k8s-master

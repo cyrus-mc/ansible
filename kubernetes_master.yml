@@ -6,6 +6,6 @@
   gather_facts: true
   roles:
   - etcd
-  - flannel
-  - docker
-  - k8s-master
+    #  - flannel
+    #- docker
+    #- k8s-master
