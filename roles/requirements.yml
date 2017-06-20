@@ -5,7 +5,6 @@
 - src: https://github.com/Smarsh/ansible_etcd.git
   name: etcd
   scm: git
-  version: static_discovery
 
 - src: https://github.com/Smarsh/ansible_docker.git
   name: docker
@@ -14,12 +13,10 @@
 - src: https://github.com/Smarsh/ansible_flannel.git
   name: flannel
   scm: git
-  version: static_discovery
 
 - src: https://github.com/Smarsh/ansible_k8s_master.git
   name: k8s-master
   scm: git
-  version: static_discovery
 
 - src: https://github.com/Smarsh/ansible_k8s_worker.git
   name: k8s-worker
