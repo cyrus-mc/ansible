@@ -3,9 +3,14 @@
   vars:
     ansible_python_interpreter: "/home/core/bin/python"
     ansible_become: true
+    hyperkube:
+      image: quay.io/coreos/hyperkube
+      tag: v1.6.5_coreos.0
+
   gather_facts: true
   roles:
   - etcd
   - flannel
   - docker
   - k8s-master
+  - locksmith
