@@ -29,8 +29,3 @@
     when: ansible_local.k8s_facts.labels.role == 'mongodb'
   - include_role:
       name: k8s-worker
-  #  roles:
-  #- flannel
-  #- docker
-  #- k8s-worker
-  #- locksmith
