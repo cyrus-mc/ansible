@@ -2,7 +2,7 @@
 - src: yatesr.timezone
 
 # from GitHub
-- src: https://github.com/Smarsh/ansible_etcd.git
+- src: https://github.com/Smarsh/ansible-etcd.git
   name: etcd
   scm: git
 
@@ -22,3 +22,22 @@
   name: k8s-worker
   scm: git
 
+- src: https://github.com/Smarsh/ansible-locksmith.git
+  name: locksmith
+  scm: git
+
+- src: https://github.com/Smarsh/ansible-timesyncd.git
+  name: timesyncd
+  scm: git
+
+- src: https://github.com/Smarsh/ansible-udev.git
+  name: udev
+  scm: git
+
+- src: https://github.com/Smarsh/ansible-sysctl.git
+  name: sysctl
+  scm: git
+
+- src: https://github.com/Smarsh/ansible-transparent_hugepages.git
+  name: transparent_hugepages
+  scm: git
