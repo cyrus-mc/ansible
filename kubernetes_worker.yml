@@ -5,8 +5,32 @@
     ansible_python_interpreter: "/home/core/bin/python"
     ansible_become: true
   gather_facts: true
-  roles:
-  - flannel
-  - docker
-  - k8s-worker
-  - locksmith
+  tasks:
+  - debug:
+      var: ansible_local.k8s_facts.labels.role
+  - include_vars: "{{ item }}"
+    with_items:
+    - "vars/{{ ansible_local.k8s_facts.labels.role | default('default') }}.yml"
+    - "vars/default.yml"
+  - include_role:
+      name: flannel
+  - include_role:
+      name: docker
+  - include_role:
+      name: locksmith
+  - include_role:
+      name: sysctl
+  - include_role:
+      name: udev
+  - include_role:
+      name: timesyncd
+  - include_role:
+      name: transparent-hugepages
+    when: ansible_local.k8s_facts.labels.role == 'mongodb'
+  - include_role:
+      name: k8s-worker
+  #  roles:
+  #- flannel
+  #- docker
+  #- k8s-worker
+  #- locksmith

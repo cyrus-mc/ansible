@@ -1,0 +1,8 @@
+---
+etcd_endpoints: "http://{{ ansible_local.k8s_facts.etcd_servers | default('localhost') }}:2379"
+
+etcd_version: "v3.1.8"
+etcd_advertise_client_urls: "http://{{ ansible_eth0.ipv4.address | default('localhost') }}:2379"
+etcd_initial_advertise_peer_urls: "http://{{ ansible_eth0.ipv4.address | default('localhost') }}:2379"
+etcd_initial_cluster_token: "etcd-cluster-{{ ansible_local.k8s_facts.cluster_name }}"
+etcd_name: "{{ ansible_local.k8s_facts.hostname | default(ansible_hostname) }}"
