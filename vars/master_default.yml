@@ -12,3 +12,9 @@ etcd_name: "{{ ansible_local.k8s_facts.hostname | default(ansible_hostname) }}"
 locksmithd_etcd_endpoints: *etcd_endpoints
 # locksmithd control group
 locksmithd_control_group: "kubernetes-master"
+
+# set the version of hyperkube to use
+hyperkube:
+  image: quay.io/coreos/hyperkube
+  tag: v1.7.6_coreos.0
+
